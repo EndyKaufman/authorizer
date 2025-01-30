@@ -91,6 +91,39 @@ func GetDomainName(uri string) string {
 	return host
 }
 
+// GetDomainName function to get domain name
+func GetDomainName2(uri string) string {
+	tempURI := uri
+	if !strings.HasPrefix(tempURI, "http://") && !strings.HasPrefix(tempURI, "https://") {
+		tempURI = "https://" + tempURI
+	}
+
+	u, err := url.Parse(tempURI)
+	if err != nil {
+		return `localhost`
+	}
+
+	host := u.Hostname()
+
+	// code to get root domain in case of sub-domains
+	hostParts := strings.Split(host, ".")
+	hostPartsLen := len(hostParts)
+
+	if hostPartsLen == 1 {
+		return host
+	}
+
+	if hostPartsLen == 2 {
+		if hostParts[0] == "www" {
+			return hostParts[1]
+		} else {
+			return host
+		}
+	}
+
+	return host
+}
+
 // GetAppURL to get /app url if not configured by user
 func GetAppURL(gc *gin.Context) string {
 	envAppURL, err := memorystore.Provider.GetStringStoreEnvVariable(constants.EnvKeyAppURL)
