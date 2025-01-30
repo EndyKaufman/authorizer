@@ -24,7 +24,7 @@ func SetSession(gc *gin.Context, sessionID string) {
 	httpOnly := appCookieSecure
 	hostname := parsers.GetHost(gc)
 	host, _ := parsers.GetHostParts(hostname)
-	domain := parsers.GetDomainName(hostname)
+	domain := parsers.GetDomainName2(hostname)
 	if domain != "localhost" {
 		domain = "." + domain
 	}
@@ -59,7 +59,7 @@ func DeleteSession(gc *gin.Context) {
 	httpOnly := appCookieSecure
 	hostname := parsers.GetHost(gc)
 	host, _ := parsers.GetHostParts(hostname)
-	domain := parsers.GetDomainName(hostname)
+	domain := parsers.GetDomainName2(hostname)
 	if domain != "localhost" {
 		domain = "." + domain
 	}
