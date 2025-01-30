@@ -84,7 +84,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: lakhansamani/authorizer
+          images: endykaufman/authorizer
           tags: |
             type=schedule
             type=ref,event=branch
